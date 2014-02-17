@@ -17,5 +17,20 @@ BRL_Unit::BRL_Unit(){
 }
 
 BRL_Unit::~BRL_Unit(){
+}
 
+SDL_Surface* BRL_Unit::getBitmap(){
+	return bitmap;
+}
+
+BRL_Position* BRL_Unit::getPos(){
+	return pos;
+}
+
+void BRL_Unit::setBitmap(SDL_Surface *bitmap){
+	this->bitmap = bitmap;
+}
+
+void BRL_Unit::setPos(BRL_Position *pos){
+	this->pos = pos;
 }
