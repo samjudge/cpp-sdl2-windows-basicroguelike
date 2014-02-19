@@ -2,6 +2,7 @@
 #define H_PROG_CONSTS
 
 #define IMPASSIBLE_TILE_M_VALUE 0
+
 #define EMPTY_TILE_M_VALUE 1
 
 #endif
