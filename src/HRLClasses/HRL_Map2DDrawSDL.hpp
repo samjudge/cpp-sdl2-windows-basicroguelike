@@ -3,23 +3,21 @@
 
 #include "..\BRLClasses\BRL_Map.hpp"
 
-class HRL_Map2DDrawSDL :  public BRL_Map{
+class HRL_Map2DDrawSDL{
 public:
-	HRL_Map2DDrawSDL(SDL_Window* window, int maxWidth, int maxHeight);
-	HRL_Map2DDrawSDL(SDL_Window* window, std::vector<BRL_Tile> mapTilesList, int maxWidth, int maxHeight);
+	HRL_Map2DDrawSDL(BRL_Map* map, SDL_Window* window);
 
 	~HRL_Map2DDrawSDL();
 
-	void draw2DMapSDL();
+	void draw2DMapSDL(); //in funture projects, have the Map class, and an extension SDLDrawableMap extend a virtual Drawable type with a draw method. I can then put the graphics logic in that extension class
 
 protected:
 
 private:
 
+	SDL_Renderer *renderer;
 	SDL_Window* window;
-	int windowWidth;
-	int windowHeight;
-
+	BRL_Map* map;
 };
 
 #endif

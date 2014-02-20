@@ -3,15 +3,18 @@
 #include <vector>
 #include <cmath>
 
-
+#include "..\BRLClasses\BRL_Map.hpp"
 #include "HRL_MapGenerator.hpp"
 
 
 #define HUGE_NUM 9999999
 
-	std::vector<BRL_Tile> HRL_MapGenerator::generateMap(int width, int height){
+	std::vector<BRL_Tile> HRL_MapGenerator::generateMap(BRL_Map mapToDraw){ //should return a BRL_Map
 
 		srand(time(NULL)); //set random number seed
+
+		int width = mapToDraw.getMaxWidth();
+		int height = mapToDraw.getMaxHeight();
 
 		BRL_Tile map[width][height];
 
@@ -22,9 +25,9 @@
 			}
 		}
 
-		int numberOfRooms = (rand()%10)+10;
-		int minRoomSize = 5;
-		int maxRoomSize = 15;
+		int numberOfRooms = (rand()%5)+3;
+		int minRoomSize = 4;
+		int maxRoomSize = 10;
 
 		std::vector<Room> rooms(0);
 

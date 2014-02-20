@@ -8,11 +8,13 @@ last edited 18/02/2014
 #include "BRLClasses/BRL_Map.hpp"
 #include "HRLClasses/HRL_MapGenerator.hpp"
 #include "HRLClasses/HRL_Map2DDrawSDL.hpp"
+#include "HRLClasses/HRL_EventHandler.hpp"
+#include "constants.hpp"
 
-const int SCREEN_WIDTH = 1024;
-const int SCREEN_HEIGHT = 1024;
-const int MAP_WIDTH = 64;
-const int MAP_HEIGHT = 64;
+const int MAP_WIDTH = 32;
+const int MAP_HEIGHT = 32;
+const int SCREEN_WIDTH = 27 * MAP_WIDTH;
+const int SCREEN_HEIGHT = 27 * MAP_HEIGHT;
 
 
 void printBRLMapAsChars(BRL_Map gameMap){
@@ -28,7 +30,7 @@ void printBRLMapAsChars(BRL_Map gameMap){
 }
 
 void initGameMap(BRL_Map& gameMap){
-	gameMap.setMapTilesList(HRL_MapGenerator::getInstance()->generateMap(gameMap.getMaxWidth(), gameMap.getMaxHeight()));
+	gameMap.setMapTilesList(HRL_MapGenerator::getInstance()->generateMap(gameMap));
 }
 
 int main(int argc, char *argv[]){
@@ -37,18 +39,23 @@ int main(int argc, char *argv[]){
     	return 1;
     }
 
-    SDL_Window *window = SDL_CreateWindow("Hi World", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-    HRL_Map2DDrawSDL gameMap(window, MAP_WIDTH, MAP_HEIGHT);
+    SDL_Window *window = SDL_CreateWindow("Hi World", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, NULL); //replace 0,0 with screen height/width if I must
+    BRL_Map* gameMap = new BRL_Map(MAP_WIDTH,MAP_HEIGHT);
+    HRL_EventHandler* eventHandler =  HRL_EventHandler::getInstance();
+
+
+    HRL_Map2DDrawSDL* gameMapDrawable = new HRL_Map2DDrawSDL(gameMap, window);
 
     if (window == NULL){
     	printf("something went wrong making the window");
     }
 
-    initGameMap(gameMap); //create random map
+    initGameMap(*gameMap); //create random map
 
-    gameMap.draw2DMapSDL();
-
-    while(1);
+    while(eventHandler->handleEventLoop(gameMap)){
+        gameMapDrawable->draw2DMapSDL(); //draw the map while we do not quit
+        printf("game loop");
+    }
 
     //printBRLMapAsChars();
 

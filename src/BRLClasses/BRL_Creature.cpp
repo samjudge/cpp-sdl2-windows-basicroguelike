@@ -1,5 +1,5 @@
 #include "BRL_Creature.hpp"
-
+#include <stdio.h>
 BRL_Creature::BRL_Creature(int strStat, int dexStat, int intStat, int lukStat){
 	BRL_Creature(strStat, dexStat, intStat, lukStat, 0, 0, 0);
 }
@@ -9,6 +9,11 @@ BRL_Creature::BRL_Creature(int strStat, int dexStat, int intStat, int lukStat, i
 	this->dexStat = dexStat;
 	this->intStat = intStat;
 	this->lukStat = lukStat;
+	this->xVel = 1;
+	this->yVel = 1;
+	printf("\nA creature was made with yVel: %d\n", yVel);
+	//this->getPos()->xPos = 10;
+	//this->getPos()->yPos = 10;
 }
 
 BRL_Creature::BRL_Creature(int strStat, int dexStat, int intStat, int lukStat, int xPos, int yPos, int zIndex, SDL_Surface* bitmap) : BRL_Unit(xPos, yPos, zIndex){ //changed var list from bitmap since it gets changed

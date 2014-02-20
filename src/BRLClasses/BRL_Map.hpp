@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "BRL_Tile.hpp"
+#include "BRL_Creature.hpp"
 
 class BRL_Map {
 public:
@@ -15,11 +16,15 @@ public:
 	int getMaxWidth();
 	int getMaxHeight();
 
+	BRL_Creature* getPlayer();
 
 protected:
 
 private:
 	std::vector<BRL_Tile>* mapTilesList;
+
+	BRL_Creature* player;
+
 	int maxWidth; //in tiles
 	int maxHeight; //^^
 };

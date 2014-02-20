@@ -24,11 +24,13 @@ public:
 
 	void move();
 
-protected:
-	BRL_Creature(int strStat, int intStat, int dexStat, int lukStat);
+	BRL_Creature(int strStat, int intStat, int dexStat, int lukStat); //move these into protected after BRL_Player and BRL_enemy are made (and declare virtual)
 	BRL_Creature(int strStat, int intStat, int dexStat, int lukStat,int xPos, int yPos, int zIndex);
 	BRL_Creature(int strStat, int intStat, int dexStat, int lukStat,int xPos, int yPos, int zIndex, SDL_Surface* bitmap);
 	~BRL_Creature();
+
+protected:
+
 private:
 
 	int xVel;
