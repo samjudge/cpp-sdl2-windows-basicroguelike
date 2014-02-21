@@ -28,7 +28,7 @@
 
 	bool HRL_EventHandler::handleEventLoop(BRL_Map* map){
 		if(SDL_PollEvent(eventHandler)){
-			handlePlayerEvent(map->getPlayer());
+			handlePlayerEvent(map->getPlayer(), map);
 			if(isQuitEvent()){
 				return false;
 			}
@@ -47,24 +47,27 @@
 		return false;
 	}
 
-	void HRL_EventHandler::handlePlayerEvent(BRL_Creature* player){
+	void HRL_EventHandler::handlePlayerEvent(BRL_Player* player, BRL_Map* map){
 		if(eventHandler->type == SDL_KEYDOWN){
 			switch(eventHandler->key.keysym.sym){
 			case SDLK_UP:
-				player->getPos()->yPos -= 1;
+				player->setYVel(-1);
 				break;
 			case SDLK_RIGHT:
-				player->getPos()->xPos += 1;
+				player->setXVel(1);
 				break;
 			case SDLK_DOWN:
-				player->getPos()->yPos += 1;
-				printf("\n******\nThe player's y velcity is : %d\n******\nThe Down key was pressed, the player's new position is: %d\n******\n",player->getYVel(), player->getPos()->yPos);
+				player->setYVel(1);
 				break;
 			case SDLK_LEFT:
-				player->getPos()->xPos -= 1;
+				player->setXVel(-1);
 				break;
 			}
-			printf("keypress detected\n");
+			printf("\nmoving now\n");
+			BRL_Tile targetTile = map->getMapTilesList()->at(((player->getPos()->yPos+player->getYVel())*map->getMaxWidth())+(player->getPos()->xPos+player->getXVel()));
+			printf("\ntile got\n");
+			player->move(&targetTile);
+			printf("\ndone moving\n");
 		}
 
 

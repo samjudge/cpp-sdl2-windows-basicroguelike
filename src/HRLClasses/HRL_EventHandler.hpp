@@ -22,7 +22,7 @@ private:
 
 	static HRL_EventHandler* instance;
 
-	static void handlePlayerEvent(BRL_Creature* player);
+	static void handlePlayerEvent(BRL_Player* player, BRL_Map* map);
 	static bool isQuitEvent();
 
 	static SDL_Event* eventHandler;
