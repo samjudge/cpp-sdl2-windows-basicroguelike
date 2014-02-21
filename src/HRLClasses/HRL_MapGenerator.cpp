@@ -4,17 +4,22 @@
 #include <cmath>
 
 #include "..\BRLClasses\BRL_Map.hpp"
+#include "..\BRLClasses\BRL_Player.hpp"
 #include "HRL_MapGenerator.hpp"
 
 
 #define HUGE_NUM 9999999
 
-	std::vector<BRL_Tile> HRL_MapGenerator::generateMap(BRL_Map mapToDraw){ //should return a BRL_Map
+	std::vector<BRL_Tile> HRL_MapGenerator::generateMap(BRL_Map& mapToDraw){ //should return a BRL_Map
 
 		srand(time(NULL)); //set random number seed
 
 		int width = mapToDraw.getMaxWidth();
 		int height = mapToDraw.getMaxHeight();
+
+		//debug?
+		BRL_Player* player;
+		//endbug
 
 		BRL_Tile map[width][height];
 
@@ -56,6 +61,15 @@
 			//endbug
 			rooms.push_back(*room); //add the room to the vector
 			numberOfGeneratedRooms = rooms.size();
+
+			//debug
+			if(n == 0) { //if it's the first room add the player to it
+				player = new BRL_Player(0,0,0,0,room->x,room->y,0);
+				printf("%d\n",player->getPos()->xPos);
+				printf("%d\n***********",player->getPos()->yPos);
+				mapToDraw.setPlayer(player);
+			}
+			//endbug
 		}
 
 		for(int n = 0; n < numberOfRooms; n++){ //corridoor

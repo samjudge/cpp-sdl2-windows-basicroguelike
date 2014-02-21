@@ -2,6 +2,7 @@
 #define H_BRL_CREATURE
 
 #include "BRL_Unit.hpp"
+#include "BRL_Tile.hpp"
 
 class BRL_Creature : public BRL_Unit {
 public:
@@ -22,15 +23,12 @@ public:
 	void setCurrentHp(int currentHp);
 	int getCurrentHp();
 
-	void move();
-
+	void move(BRL_Tile* destination);
+protected:
 	BRL_Creature(int strStat, int intStat, int dexStat, int lukStat); //move these into protected after BRL_Player and BRL_enemy are made (and declare virtual)
 	BRL_Creature(int strStat, int intStat, int dexStat, int lukStat,int xPos, int yPos, int zIndex);
 	BRL_Creature(int strStat, int intStat, int dexStat, int lukStat,int xPos, int yPos, int zIndex, SDL_Surface* bitmap);
 	~BRL_Creature();
-
-protected:
-
 private:
 
 	int xVel;

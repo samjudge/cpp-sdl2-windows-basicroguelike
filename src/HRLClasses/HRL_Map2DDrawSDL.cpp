@@ -54,10 +54,10 @@ void HRL_Map2DDrawSDL::draw2DMapSDL(){
 			//I should probably change the name of moveValue to something else, as it's use is different than named - or something else maybe
 
 			switch(tileToDraw.getMoveValue()){
-			case 0:
+			case IMPASSIBLE_TILE_M_VALUE:
 				tileToDraw.setBitmap(wallSurface);
 				break;
-			case 1:
+			case EMPTY_TILE_M_VALUE:
 				tileToDraw.setBitmap(floorSurface);
 			}
 
@@ -123,8 +123,8 @@ void HRL_Map2DDrawSDL::draw2DMapSDL(){
 	printf("player y: %d\n",map->getPlayer()->getPos()->yPos);
 	//enddebug
 	//this should be inside the BRL_Creature
-	src->x = 1 * 27;
-	src->y = 0 * 27;
+	src->x = 2 * 27;
+	src->y = 1 * 27;
 	src->w = 27;
 	src->h = 27;
 	//end what should be

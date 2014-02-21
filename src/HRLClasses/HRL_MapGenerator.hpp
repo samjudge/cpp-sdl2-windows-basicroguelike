@@ -12,7 +12,7 @@
 
 class HRL_MapGenerator {
 public:
-	static std::vector<BRL_Tile> generateMap(BRL_Map mapToDraw);
+	static std::vector<BRL_Tile> generateMap(BRL_Map& mapToDraw);
 	static HRL_MapGenerator* getInstance();
 protected:
 

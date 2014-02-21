@@ -1,5 +1,7 @@
 #include "BRL_Creature.hpp"
+#include "BRL_Tile.hpp"
 #include <stdio.h>
+
 BRL_Creature::BRL_Creature(int strStat, int dexStat, int intStat, int lukStat){
 	BRL_Creature(strStat, dexStat, intStat, lukStat, 0, 0, 0);
 }
@@ -9,11 +11,7 @@ BRL_Creature::BRL_Creature(int strStat, int dexStat, int intStat, int lukStat, i
 	this->dexStat = dexStat;
 	this->intStat = intStat;
 	this->lukStat = lukStat;
-	this->xVel = 1;
-	this->yVel = 1;
 	printf("\nA creature was made with yVel: %d\n", yVel);
-	//this->getPos()->xPos = 10;
-	//this->getPos()->yPos = 10;
 }
 
 BRL_Creature::BRL_Creature(int strStat, int dexStat, int intStat, int lukStat, int xPos, int yPos, int zIndex, SDL_Surface* bitmap) : BRL_Unit(xPos, yPos, zIndex){ //changed var list from bitmap since it gets changed
@@ -77,7 +75,15 @@ int BRL_Creature::getYVel(){
 	return yVel;
 }
 
-void BRL_Creature::move(){ //moves in the given vector of xvel and yvel
-	this->getPos()->xPos = (this->getPos()->xPos) + xVel;
-	this->getPos()->yPos = (this->getPos()->yPos) + yVel;
+void BRL_Creature::move(BRL_Tile* destinationTile){ //moves in the given vector of xvel and yvel
+	printf("inside move function");
+	int targetMoveValue = destinationTile->getMoveValue(); //get the target tile's move value
+	printf("\nmvalue found %d\n", 0/1);
+	if (xVel != 0) this->getPos()->xPos += targetMoveValue/xVel; //modify the actual position of the dodo based on the values obtained
+	if (yVel != 0) this->getPos()->yPos += targetMoveValue/yVel;
+	printf("\nposition altered\n");
+	this->setYVel(0);
+	this->setXVel(0); //reset the velocities
+	printf("\nvelocity reset\n");
+
 }

@@ -1,13 +1,14 @@
 #include "BRL_Map.hpp"
-
+#include "BRL_Player.hpp"
 
 
 BRL_Map::BRL_Map(int maxWidth, int maxHeight){
 	mapTilesList = new std::vector<BRL_Tile>(0);
 	this->maxHeight = maxHeight;
 	this->maxWidth = maxWidth;
+
 	//debug
-	this->player = new BRL_Creature(0,0,0,0);
+	//this->player = new BRL_Player(); //move to BRL_Context when multiple levels
 	//enddebug
 }
 
@@ -40,6 +41,11 @@ int BRL_Map::getMaxWidth(){
 	return maxWidth;
 }
 
-BRL_Creature* BRL_Map::getPlayer(){
+void BRL_Map::setPlayer(BRL_Player* player){
+	this->player = player;
+}
+
+
+BRL_Player* BRL_Map::getPlayer(){
 	return player;
 }
